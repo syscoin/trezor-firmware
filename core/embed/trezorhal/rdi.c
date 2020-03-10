@@ -39,7 +39,7 @@ static void rdi_reseed(void) {
   chacha_drbg_reseed(&drbg_ctx, entropy);
 }
 
-void buffer_refill(void) {
+static void buffer_refill(void) {
   chacha_drbg_generate(&drbg_ctx, buffer, BUFFER_LENGTH);
 }
 
