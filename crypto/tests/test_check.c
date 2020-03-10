@@ -36,6 +36,8 @@
 #include <valgrind/valgrind.h>
 #endif
 
+#include "options.h"
+
 #include "address.h"
 #include "aes/aes.h"
 #include "base32.h"
@@ -57,7 +59,6 @@
 #include "monero/monero.h"
 #include "nem.h"
 #include "nist256p1.h"
-#include "options.h"
 #include "pbkdf2.h"
 #include "rand.h"
 #include "rc4.h"
