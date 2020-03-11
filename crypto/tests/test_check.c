@@ -4531,10 +4531,8 @@ START_TEST(test_blake2s) {
 END_TEST
 
 START_TEST(test_chacha_drbg) {
-  char entropy[2 * CHACHA_DRBG_SEED_LENGTH] =
-      "8a09b482de30c12ee1d2eb69dd49753d4252b3d36128ee1e";
-  char reseed[2 * CHACHA_DRBG_SEED_LENGTH] =
-      "9ec4b991f939dbb44355392d05cd793a2e281809d2ed7139";
+  char entropy[] = "8a09b482de30c12ee1d2eb69dd49753d4252b3d36128ee1e";
+  char reseed[] = "9ec4b991f939dbb44355392d05cd793a2e281809d2ed7139";
   char expected[] =
       "4caaeb7db073d34b37b5b26f8a3863849f298dab754966e0f75526823216057c2626e044"
       "9f7ffda7c3dba8841c06af01029eebfd4d4cae951c19c9f6ff6812783e58438840883401"
