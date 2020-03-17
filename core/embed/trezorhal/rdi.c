@@ -31,7 +31,7 @@ static CHACHA_DRBG_CTX drbg_ctx;
 static uint8_t buffer[BUFFER_LENGTH];
 static size_t buffer_index;
 static uint8_t session_delay;
-static bool rdi_enabled;
+static bool rdi_enabled = false;
 
 static void rdi_reseed(void) {
   uint8_t entropy[CHACHA_DRBG_SEED_LENGTH];
@@ -58,7 +58,7 @@ void rdi_regenerate_session_delay(void) {
   if (rdi_enabled) session_delay = random8();
 }
 
-void rdi_handler(uint32_t uw_tick) {
+__attribute__((target("thumb"))) void rdi_handler(uint32_t uw_tick) {
   if (rdi_enabled) {
     uint32_t delay = random8() + session_delay;
 
