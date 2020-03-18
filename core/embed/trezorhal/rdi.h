@@ -24,6 +24,6 @@
 
 void rdi_start(void);
 void rdi_stop(void);
-void rdi_regenerate_session_delay(void);
+void rdi_refresh_session_delay(void);
 void rdi_handler(uint32_t uw_tick);
 #endif

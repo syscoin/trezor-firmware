@@ -31,6 +31,7 @@ static CHACHA_DRBG_CTX drbg_ctx;
 static uint8_t buffer[BUFFER_LENGTH];
 static size_t buffer_index;
 static uint8_t session_delay;
+static bool refresh_session_delay;
 static bool rdi_enabled = false;
 
 static void rdi_reseed(void) {
@@ -54,12 +55,17 @@ static uint32_t random8(void) {
   return buffer[buffer_index];
 }
 
-void rdi_regenerate_session_delay(void) {
-  if (rdi_enabled) session_delay = random8();
+void rdi_refresh_session_delay(void) {
+  if (rdi_enabled) refresh_session_delay = true;
 }
 
 __attribute__((target("thumb"))) void rdi_handler(uint32_t uw_tick) {
   if (rdi_enabled) {
+    if (refresh_session_delay) {
+      session_delay = random8();
+      refresh_session_delay = false;
+    }
+
     uint32_t delay = random8() + session_delay;
 
     asm volatile(
@@ -96,7 +102,7 @@ void rdi_start(void) {
     chacha_drbg_init(&drbg_ctx, entropy);
     buffer_refill();
     buffer_index = 0;
-    session_delay = random8();
+    refresh_session_delay = true;
     rdi_enabled = true;
   }
 }

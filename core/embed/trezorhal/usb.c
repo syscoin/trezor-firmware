@@ -470,7 +470,7 @@ static uint8_t usb_class_setup(USBD_HandleTypeDef *dev,
 
 static uint8_t usb_class_data_in(USBD_HandleTypeDef *dev, uint8_t ep_num) {
 #ifdef RDI
-  rdi_regenerate_session_delay();
+  rdi_refresh_session_delay();
 #endif
   for (int i = 0; i < USBD_MAX_NUM_INTERFACES; i++) {
     switch (usb_ifaces[i].type) {
@@ -495,7 +495,7 @@ static uint8_t usb_class_data_in(USBD_HandleTypeDef *dev, uint8_t ep_num) {
 
 static uint8_t usb_class_data_out(USBD_HandleTypeDef *dev, uint8_t ep_num) {
 #ifdef RDI
-  rdi_regenerate_session_delay();
+  rdi_refresh_session_delay();
 #endif
   for (int i = 0; i < USBD_MAX_NUM_INTERFACES; i++) {
     switch (usb_ifaces[i].type) {
