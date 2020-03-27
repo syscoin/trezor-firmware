@@ -20,7 +20,7 @@
 #ifndef __TREZORHAL_RDI_H__
 #define __TREZORHAL_RDI_H__
 
-#include "chacha_drbg.h"
+#include <stdint.h>
 
 void rdi_start(void);
 void rdi_stop(void);
